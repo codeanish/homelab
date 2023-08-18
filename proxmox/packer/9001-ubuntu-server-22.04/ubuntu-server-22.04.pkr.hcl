@@ -21,11 +21,15 @@ variable "proxmox_api_token_secret" {
     sensitive = true
 }
 
-variable = ssh_username {
+variable "ssh_username" {
     type = string
 }
 
-source "proxmox" "ubuntu-servery" {
+variable "ssh_private_key_file" {
+    type = string
+}
+
+source "proxmox" "ubuntu-server" {
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
