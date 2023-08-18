@@ -1,0 +1,6 @@
+proxmox_api_token_id="TOKEN_ID"
+proxmox_api_token_secret="SECRET_TOKEN"
+proxmox_api_url="API_URL"
+ssh_username="SSH_USER_NAME"
+ssh_private_key_file="SSH_PRIVATE_KEY_PATH"
+ssh_public_key="SSH_PUBLIC_KEY"
