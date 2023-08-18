@@ -21,7 +21,11 @@ variable "proxmox_api_token_secret" {
     sensitive = true
 }
 
-source "proxmox" "ubuntu-server-jammy" {
+variable = ssh_username {
+    type = string
+}
+
+source "proxmox" "ubuntu-servery" {
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
@@ -29,8 +33,8 @@ source "proxmox" "ubuntu-server-jammy" {
 
     node = "proxmox"
     vm_id = "9001"
-    vm_name = "ubuntu-server-jammy"
-    template_description = "Ubuntu Server Jammy"
+    vm_name = "ubuntu-server-22.04"
+    template_description = "Ubuntu Server 22.04 Jammy"
 
     iso_file = "local:iso/ubuntu-22.04.3-live-server-amd64.iso"
     iso_storage_pool = "local"
@@ -74,16 +78,16 @@ source "proxmox" "ubuntu-server-jammy" {
     boot_wait = "5s"
 
     http_directory = "http"
-    ssh_username = "anish"
-    ssh_private_key_file = "~/.ssh/id_ed25519"
+    ssh_username = "${var.ssh_username}"
+    ssh_private_key_file = "${var.ssh_private_key_file}"
     ssh_timeout = "20m"
 }
 
 # Build Definition to create the VM Template
 build {
 
-    name = "ubuntu-server-jammy"
-    sources = ["source.proxmox.ubuntu-server-jammy"]
+    name = "ubuntu-server-22.04"
+    sources = ["source.proxmox.ubuntu-server"]
 
     # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
     provisioner "shell" {
