@@ -1,6 +1,6 @@
 
 # Get SSH Public Key
-$variables = Get-Content -Path "../credentials.auto.pkrvars.hcl" -Raw
+$variables = Get-Content -Path "../variables.auto.pkrvars.hcl" -Raw
 
 foreach ($line in $variables.Split("`n")) {
     if ($line -like "*ssh_public_key*") {
