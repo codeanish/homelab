@@ -10,10 +10,10 @@ resource "proxmox_vm_qemu" "adguard-home" {
     agent = 1
     
     # VM Specs
-    cores = 4
+    cores = 2
     sockets = 1
     cpu = "host"    
-    memory = 4096
+    memory = 1024
 
     # Networking
     network {
