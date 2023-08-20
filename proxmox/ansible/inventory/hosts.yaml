@@ -3,11 +3,14 @@ adguard:
     adguard_1:
       ansible_host: 10.0.20.88
 
-docker:
+portainer:
   hosts:
     portainer:
       ansible_host: 10.0.20.50
-    # docker_1:
-    #   ansible_host: 10.0.20.51
-    # docker_2:
-    #   ansible_host: 10.0.20.52
+
+docker:
+  hosts:
+    docker_1:
+      ansible_host: 10.0.20.51
+    docker_2:
+      ansible_host: 10.0.20.52

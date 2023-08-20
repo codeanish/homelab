@@ -6,11 +6,47 @@
     - vars/default.yaml
 
   tasks:
-  - name: Check whether a package called docker is installed
-    command: docker --version
+  - name: Install aptitude using apt
+    apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
-  - name: Create Docker Volume
+  - name: Install required system packages for Docker
+    apt: name={{ docker_required_packages }} state=latest update_cache=yes
+
+  - name: Add Docker GPG key
+    apt_key:
+      url: "{{ docker_gpg_url }}"
+      state: present
+
+  - name: Add Docker repository
+    apt_repository:
+      repo: "{{ docker_repo }}"
+      state: present
+
+  - name: Install Docker
+    apt: name={{ docker_packges }} state=latest update_cache=yes
+
+  - name: Install Python Docker module
+    pip:
+      name: docker
+
+  - name: Add adminstrator to docker group
+    user:
+      name: "{{ admin_user }}"
+      groups: docker
+      append: yes
+
+  - name: Get docker running processes
+    command: docker ps
+    register: docker_processes
+
+  - name: Get docker volumes
+    command: docker volume ls
+    register: docker_volumes
+
+  - name: Create Docker Volume portainer_data when it doesn't exist
     command: docker volume create portainer_data
+    when: docker_volumes.stdout.find('portainer_data') == -1
 
-  - name: Install & Run Portainer
+  - name: Install & Run Portainer Server when not running
     command: docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+    when: docker_processes.stdout.find('portainer') == -1
