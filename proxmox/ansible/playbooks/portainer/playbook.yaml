@@ -1,0 +1,16 @@
+---
+- name: Install Portainer on Docker hosts
+  hosts: portainer
+  become: yes
+  vars_files:
+    - vars/default.yaml
+
+  tasks:
+  - name: Check whether a package called docker is installed
+    command: docker --version
+
+  - name: Create Docker Volume
+    command: docker volume create portainer_data
+
+  - name: Install & Run Portainer
+    command: docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
