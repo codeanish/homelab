@@ -1,10 +1,10 @@
-resource "proxmox_vm_qemu" "adguard-home" {
+resource "proxmox_vm_qemu" "portainer" {
     
     # VM General Settings
     target_node = "proxmox"
-    vmid = "101"
-    name = "adguard-home"
-    desc = "Ubuntu Server installation of adguard home"
+    vmid = "102"
+    name = "portainer"
+    desc = "Ubuntu Server installation of Portainer Server CE"
     clone = "ubuntu-server-22.04"
     onboot = true 
     agent = 1
@@ -30,6 +30,6 @@ resource "proxmox_vm_qemu" "adguard-home" {
 
     # Cloud init
     os_type = "cloud-init"
-    ipconfig0 = "ip=10.0.20.88/24,gw=10.0.20.1"
+    ipconfig0 = "ip=10.0.20.50/24,gw=10.0.20.1"
     ciuser = "anish"
 }
