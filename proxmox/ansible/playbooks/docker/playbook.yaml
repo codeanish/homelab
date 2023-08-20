@@ -35,8 +35,10 @@
       groups: docker
       append: yes
 
-  # - name: Install Docker Compose
-  #   get_url:
-  #     url: "{{ docker_compose_url }}"
-  #     dest: /usr/local/bin/docker-compose
-  #     mode: u+x,g+x,o+x
+  - name: Get docker running processes
+    command: docker ps
+    register: docker_processes
+
+  - name: Run Portainer agent when not running
+    command: docker run -d -p 9001:9001 --name portainer_agent --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes portainer/agent:2.18.4
+    when: docker_processes.stdout.find('portainer_agent') == -1
