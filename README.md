@@ -17,4 +17,17 @@ Unbound is a validating, recursive, caching DNS server. This connects directly t
 
 ### NGINX proxy manager
 https://nginxproxymanager.com/
-NGINX proxy manager is being used as a reverse proxy with built in SSL. This enables me to access all my internally hosted services over SSL. The way it works is that I register an SSL certificate with NGINX proxy manager. I can then use that SSL Certificate to configure a set of reverse proxy hosts so that everything on *.local.codeanish.com is routed to the appropriate service. I pass it https://homepage.local.codeanish.com and it proxies that request to http://10.0.20.88:3000 while providing SSL and acting as the TLS termination point.  
+NGINX proxy manager is being used as a reverse proxy with built in SSL. This enables me to access all my internally hosted services over SSL. The way it works is that I register an SSL certificate with NGINX proxy manager. I can then use that SSL Certificate to configure a set of reverse proxy hosts so that everything on *.local.codeanish.com is routed to the appropriate service. I pass it https://homepage.local.codeanish.com and it proxies that request to http://10.0.20.88:3000 while providing SSL and acting as the TLS termination point.
+
+
+## Services I want to run
+* Bitwarden
+* Search Engine
+* K8S
+* Automated unifi configuration
+* Plex (hosted before, need to do it again)
+* Cloud storage
+* Notes
+* VS Code Server
+* Self developed apps
+* Load balancer and high availability
