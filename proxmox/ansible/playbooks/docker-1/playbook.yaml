@@ -1,0 +1,19 @@
+---
+- name: Run docker images on Docker 1
+  hosts: docker_1
+  become: yes
+  vars_files:
+    - vars/default.yaml
+
+  tasks:
+  - name: Make nginx proxy manager directory
+    file:
+      path: /usr/local/bin/docker/nginx_proxy_manager
+      state: directory
+  - name: Copy nginx proxy manager docker compose file
+    copy:
+      src: files/nginx-proxy-manager.docker-compose.yaml
+      dest: /usr/local/bin/docker/nginx_proxy_manager/docker-compose.yaml
+  
+  - name: Go to the folder and execute command
+    command: chdir=/usr/local/bin/docker/nginx_proxy_manager docker compose up -d
