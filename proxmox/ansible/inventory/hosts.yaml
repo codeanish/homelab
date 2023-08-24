@@ -3,6 +3,11 @@ adguard:
     adguard_1:
       ansible_host: 10.0.20.88
 
+unbound:
+  hosts:
+    unbound_1:
+      ansible_host: 10.0.20.10
+
 portainer:
   hosts:
     portainer:

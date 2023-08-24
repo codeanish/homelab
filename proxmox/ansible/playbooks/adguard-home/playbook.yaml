@@ -3,7 +3,7 @@
   hosts: adguard
   become: yes
   vars_files:
-    - vars/default.yml
+    - vars/default.yaml
 
   tasks:
   - name: Install Adguard Home
