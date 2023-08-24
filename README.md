@@ -31,3 +31,6 @@ NGINX proxy manager is being used as a reverse proxy with built in SSL. This ena
 * VS Code Server
 * Self developed apps
 * Load balancer and high availability
+* Uptime Kuma
+* Grafana
+* Loki
