@@ -1,11 +1,11 @@
 resource "proxmox_vm_qemu" "unbound" {
     
     # VM General Settings
-    target_node = "proxmox"
+    target_node = var.proxmox_node_name
     vmid = "105"
     name = "unbound"
     desc = "Ubuntu Server installation of adguard home"
-    clone = "ubuntu-server-22.04"
+    clone = var.ubuntu_base_image_name
     onboot = true 
     agent = 1
     
@@ -17,19 +17,19 @@ resource "proxmox_vm_qemu" "unbound" {
 
     disk {
         size = "20G"
-        type = "scsi"
-        format = "raw"
-        storage = "local-lvm-nvme"
+        type = var.storage_type
+        format = var.storage_format
+        storage = var.storage_volume_name
     }
 
     # Networking
     network {
-        bridge = "vmbr1"
-        model  = "virtio"
+        bridge = var.network_bridge
+        model  = var.network_model
     }
 
     # Cloud init
     os_type = "cloud-init"
-    ipconfig0 = "ip=10.0.20.10/24,gw=10.0.20.1"
-    ciuser = "anish"
+    ipconfig0 = "ip=${var.unbound_ip}/24,gw=${var.gateway_ip}"
+    ciuser = var.ciuser
 }
