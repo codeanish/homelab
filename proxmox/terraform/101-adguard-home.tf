@@ -13,7 +13,7 @@ resource "proxmox_vm_qemu" "adguard-home" {
     cores = 2
     sockets = 1
     cpu = "host"    
-    memory = 1024
+    memory = 1536
 
     disk {
         size = "20G"
