@@ -2,6 +2,10 @@ crash.log
 packer_cache/
 *.pkrvars.hcl
 *.box
+.DS_Store
+AdguardHome.yaml
+hosts.yaml
+.vscode
 
 # Terraform ignore files
 **/.terraform/*
@@ -18,4 +22,3 @@ override.tf.json
 .terraformrc
 terraform.rc
 user-data
-.vscode/settings.json

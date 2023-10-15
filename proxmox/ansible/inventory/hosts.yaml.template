@@ -1,0 +1,21 @@
+adguard:
+  hosts:
+    adguard_1:
+      ansible_host: [IP]
+
+unbound:
+  hosts:
+    unbound_1:
+      ansible_host: [IP]
+
+portainer:
+  hosts:
+    portainer:
+      ansible_host: [IP]
+
+docker:
+  hosts:
+    docker_1:
+      ansible_host: [IP]
+    docker_2:
+      ansible_host: [IP]
