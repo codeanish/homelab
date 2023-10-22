@@ -41,6 +41,9 @@ Certbot can then request issuance of certificates from Lets Encrypt. Certbot sen
 
 For a more detailed explaination of the certificate issuance process read [this](https://letsencrypt.org/how-it-works/)
 
+## Terraform
+
+Terraform has been used to create all the VM's that the infrastructure is running on. I'm using S3 as a backend for my tfstate, so the backend provider for terraform has been set to S3 along with some configuration. This was a necessary step for me as I was previously using local tfstate for my terraform which I promptly lost when cleaning up some folders on my hard drive. This clearly is not a good solution, and migration to using S3 as a backend was an important step. I'm a little uncomfortable with specifying my bucket name in something committed to a public git repo, but I figure that without access to the bucket, the name alone won't do anyone any good.
 
 ## Services I want to run
 * Bitwarden
