@@ -1,3 +1,11 @@
+servers:
+  hosts:
+    adguard_1:
+    unbound_1:
+    docker_1:
+    docker_2:
+    portainer:
+
 adguard:
   hosts:
     adguard_1:
@@ -18,4 +26,9 @@ docker:
     docker_1:
       ansible_host: [IP]
     docker_2:
+      ansible_host: [IP]
+
+proxmox:
+  hosts:
+    proxmox:
       ansible_host: [IP]

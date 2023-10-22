@@ -1,0 +1,24 @@
+---
+- name: Update Proxmox
+  hosts: proxmox
+  become: yes
+
+  tasks:
+    - name: Comment out any enterprise repositories
+      lineinfile:
+        dest: /etc/apt/sources.list.d/pve-enterprise.list
+        regexp: '^deb'
+        line: '#deb'
+        state: present
+        backup: yes
+    - name: Comment out ceph enterprise repositories
+      lineinfile:
+        dest: /etc/apt/sources.list.d/ceph.list
+        regexp: '^deb https://enterprise'
+        line: '#deb'
+        state: present
+        backup: yes
+    - name: Apt upgrade
+      apt:
+        update_cache: yes
+        upgrade: dist
