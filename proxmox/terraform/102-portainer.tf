@@ -2,12 +2,13 @@ resource "proxmox_vm_qemu" "portainer" {
     
     # VM General Settings
     target_node = var.proxmox_node_name
-    vmid = "102"
+    vmid = 102
     name = "portainer"
     desc = "Ubuntu Server installation of Portainer Server CE"
     clone = var.ubuntu_base_image_name
     onboot = true 
     agent = 1
+    full_clone = false
     
     # VM Specs
     cores = 2

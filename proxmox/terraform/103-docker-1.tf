@@ -2,12 +2,13 @@ resource "proxmox_vm_qemu" "docker-1" {
     
     # VM General Settings
     target_node = var.proxmox_node_name
-    vmid = "103"
+    vmid = 103
     name = "docker-1"
     desc = "Ubuntu Server installation of Docker host"
     clone = var.ubuntu_base_image_name
     onboot = true 
     agent = 1
+    full_clone = false
     
     # VM Specs
     cores = 2

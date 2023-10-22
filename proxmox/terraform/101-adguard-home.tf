@@ -2,12 +2,13 @@ resource "proxmox_vm_qemu" "adguard-home" {
     
     # VM General Settings
     target_node = var.proxmox_node_name
-    vmid = "101"
+    vmid = 101
     name = "adguard-home"
     desc = "Ubuntu Server installation of adguard home"
     clone = var.ubuntu_base_image_name
     onboot = true 
     agent = 1
+    full_clone = false
     
     # VM Specs
     cores = 2
