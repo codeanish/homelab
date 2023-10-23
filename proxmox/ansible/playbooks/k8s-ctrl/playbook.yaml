@@ -1,0 +1,67 @@
+---
+- name: Install K8s ctrl plane
+  hosts: k8s_controller
+  become: true
+
+  tasks:
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+        update_cache: yes
+
+    - name: Install containerd
+      apt:
+        name: "containerd"
+
+    - name: Make sure containerd is running
+      service:
+        name: containerd
+        state: started
+        enabled: yes
+
+    - name: Make containerd config directory
+      file:
+        path: /etc/containerd
+        state: directory
+
+    # - name: Create default containerd config file in containerd config directory
+    #   command: containerd config default | sudo tee /etc/containerd/config.toml
+    #   become: true
+    - name: Get defaults from containerd.
+      command: containerd config default
+      changed_when: false
+      register: containerd_config_default
+
+    - name: Prepare containerd/config.toml from default config
+      copy:
+        dest: /tmp/containerd_config.toml
+        content: "{{ containerd_config_default.stdout }}"
+      changed_when: false
+
+    - name: Set Cgroup driver to systemd
+      lineinfile:
+        insertafter: '.*\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options\]$'
+        line: '          SystemdCgroup = true'
+        state: present
+        path: /tmp/containerd_config.toml
+      changed_when: false
+
+    - name: Make sure  SystemdCgroup = false is not set
+      ansible.builtin.lineinfile:
+        path: /tmp/containerd_config.toml
+        state: absent
+        line: '            SystemdCgroup = false'
+      changed_when: false
+
+    - name: Copy config.toml to /etc/containerd
+      copy:
+        remote_src: true
+        src: /tmp/containerd_config.toml
+        dest: /etc/containerd/config.toml
+      # notify: restart containerd
+
+    - name: Cleanup temporary file
+      file:
+        path: /tmp/containerd_config.toml
+        state: absent
+      changed_when: false

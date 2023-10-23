@@ -69,3 +69,7 @@ variable "docker_1_ip" {
 variable "docker_2_ip" {
     type = string
 }
+
+variable "k8s_ctrl_ip"{
+    type = string
+}
