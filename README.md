@@ -11,6 +11,7 @@ Homelab configuration and setup scripts. The goal of this project is to create a
 * [Adguard Home](#adguard-home)
 * [Unbound DNS](#unbound-dns)
 * [NGINX Proxy Manager](#nginx-proxy-manager)
+* [Plex Media Server](#plex-media-server)
 
 ### Adguard Home
 https://adguard.com/en/adguard-home/overview.html
@@ -41,6 +42,10 @@ Certbot can then request issuance of certificates from Lets Encrypt. Certbot sen
 
 For a more detailed explaination of the certificate issuance process read [this](https://letsencrypt.org/how-it-works/)
 
+#### Plex Media Server
+
+Plex Media Server organises and serves my Media Library. It manages Music, Movies and TV Shows that I've purchased in the past on physical media. In this day and age, it feels like it's almost essential to keep hold of your own media collections so you don't suffer from the whims of Streaming Service Providers who remove content whenever they deem fit. This allows you to view your media anywhere on your local network, and if you open up ports to the outside world on your firewall, you can access your media over the internet. This does however pose a security risk - albeit rather small, but there are alternatives to getting onto your network from outside your network like VPN which I will be utilising for this purpose.
+
 ## Terraform
 
 Terraform has been used to create all the VM's that the infrastructure is running on. I'm using S3 as a backend for my tfstate, so the backend provider for terraform has been set to S3 along with some configuration. This was a necessary step for me as I was previously using local tfstate for my terraform which I promptly lost when cleaning up some folders on my hard drive. This clearly is not a good solution, and migration to using S3 as a backend was an important step. I'm a little uncomfortable with specifying my bucket name in something committed to a public git repo, but I figure that without access to the bucket, the name alone won't do anyone any good.
@@ -50,7 +55,6 @@ Terraform has been used to create all the VM's that the infrastructure is runnin
 * Search Engine
 * K8S
 * Automated unifi configuration
-* Plex (hosted before, need to do it again)
 * Cloud storage
 * Notes
 * VS Code Server
