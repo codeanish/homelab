@@ -22,3 +22,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 user-data
+proxmox/ansible/playbooks/plex/files/.smbcredentials
+proxmox/ansible/playbooks/plex/vars/default.yaml

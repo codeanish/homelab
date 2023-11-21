@@ -73,3 +73,7 @@ variable "docker_2_ip" {
 variable "k8s_ctrl_ip"{
     type = string
 }
+
+variable "plex_ip"{
+    type = string
+}

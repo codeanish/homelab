@@ -1,0 +1,5 @@
+---
+plex_repo_url: "deb https://downloads.plex.tv/repo/deb public main"
+plex_repo_key: "https://downloads.plex.tv/plex-keys/PlexSign.key"
+smb_share: "//server/share"
+username: "username"

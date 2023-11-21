@@ -5,6 +5,7 @@ servers:
     docker_1:
     docker_2:
     portainer:
+    plex:
 
 adguard:
   hosts:
@@ -31,4 +32,9 @@ docker:
 proxmox:
   hosts:
     proxmox:
+      ansible_host: [IP]
+
+plex:
+  hosts:
+    plex:
       ansible_host: [IP]
