@@ -1,27 +1,43 @@
 # PROVIDER VARIABLES
-variable "pm_api_url" {
+variable "pve01_api_url" {
   type = string
 }
 
-variable "pm_api_token_id" {
+variable "pve01_api_token_id" {
   type = string
 }
 
-variable "pm_api_token_secret" {
+variable "pve01_api_token_secret" {
+  type = string
+}
+
+variable "pve02_api_url" {
+  type = string
+}
+
+variable "pve02_api_token_id" {
+  type = string
+}
+
+variable "pve02_api_token_secret" {
+  type = string
+}
+
+variable "pve01_target_node" {
+  type = string
+}
+
+variable "pve02_target_node" {
   type = string
 }
 
 # VM VARIABLES
-variable "target_node" {
-  type = string
-}
-
 variable "talos_version" {
   type = string
 }
 
 variable "control_plane_nodes" {
-  type = number
+  type    = number
   default = 1
 }
 
@@ -31,7 +47,7 @@ variable "control_plane_cpu_cores" {
 }
 
 variable "worker_cpu_cores" {
-  type = number
+  type    = number
   default = 2
 }
 
@@ -40,13 +56,13 @@ variable "control_plane_memory_in_mb" {
   default = 2048
 }
 
-variable "worker_nodes"{
-  type = number
+variable "worker_nodes" {
+  type    = number
   default = 2
 }
 
 variable "worker_memory_in_mb" {
-  type = number
+  type    = number
   default = 2048
 }
 
@@ -76,4 +92,9 @@ variable "disk_storage_volume" {
 variable "network_bridge" {
   type    = string
   default = "vmbr1"
+}
+
+variable "vm_state" {
+  type    = string
+  default = "stopped"
 }
