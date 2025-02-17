@@ -16,25 +16,37 @@ variable "target_node" {
   type = string
 }
 
-variable "vm_id" {
+variable "talos_version" {
+  type = string
+}
+
+variable "control_plane_nodes" {
   type = number
+  default = 1
 }
 
-variable "name" {
-  type = string
-}
-
-variable "description" {
-  type = string
-}
-
-variable "cpu_cores" {
+variable "control_plane_cpu_cores" {
   type    = number
   default = 2
 }
 
-variable "memory_in_mb" {
+variable "worker_cpu_cores" {
+  type = number
+  default = 2
+}
+
+variable "control_plane_memory_in_mb" {
   type    = number
+  default = 2048
+}
+
+variable "worker_nodes"{
+  type = number
+  default = 2
+}
+
+variable "worker_memory_in_mb" {
+  type = number
   default = 2048
 }
 
@@ -48,7 +60,11 @@ variable "iso_file_storage_pool" {
 }
 
 # STORAGE VARIABLES
-variable "disk_size_in_gb" {
+variable "control_plane_disk_size_in_gb" {
+  type = number
+}
+
+variable "worker_disk_size_in_gb" {
   type = number
 }
 

@@ -6,6 +6,8 @@ packer_cache/
 AdguardHome.yaml
 hosts.yaml
 .vscode
+_out/
+kubeconfig
 
 # Terraform ignore files
 **/.terraform/*
