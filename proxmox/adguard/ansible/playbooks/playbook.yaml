@@ -1,0 +1,39 @@
+---
+- name: Install & Configure Adguard Home
+  hosts: adguard
+  become: yes
+
+  tasks:
+  - name: Install Adguard Home
+    community.general.snap:
+      name:
+        - adguard-home
+
+  - name: Make /etc/systemd/resolved.conf.d Directory
+    command: mkdir -p /etc/systemd/resolved.conf.d
+  - name: Create adguardhome.conf
+    copy:
+      dest: "/etc/systemd/resolved.conf.d/adguardhome.conf"
+      content: |
+        [Resolve]
+        DNS=127.0.0.1
+        DNSStubListener=no
+  - name: Backup resolv.conf
+    command: mv /etc/resolv.conf /etc/resolv.conf.backup
+  - name: Create symbolic link to resolv.conf
+    command: ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+  - name: Restart systemd-resolved
+    command: systemctl reload-or-restart systemd-resolved
+
+  - name: Copy AdGuardHome.yaml config file
+    copy:
+      src: files/AdGuardHome.yaml
+      dest: /var/snap/adguard-home/current
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Restart systemctl AdGuard service
+    ansible.builtin.systemd_service:
+      name: snap.adguard-home.adguard-home.service
+      state: restarted
