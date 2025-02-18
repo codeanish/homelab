@@ -15,4 +15,4 @@ Out-File -FilePath "http/user-data" -InputObject $user_data -Encoding utf8
 
 # Build the image
 
-packer build -var-file="../variables.pkrvars.hcl" ubuntu-server-22.04.pkr.hcl
+packer build -var-file="../variables.pkrvars.hcl" ubuntu-server-24.04.pkr.hcl

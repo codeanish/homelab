@@ -29,18 +29,18 @@ variable "ssh_private_key_file" {
     type = string
 }
 
-source "proxmox" "ubuntu-server" {
+source "proxmox-iso" "ubuntu-server" {
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
     insecure_skip_tls_verify = true
 
-    node = "proxmox"
+    node = "pve-02"
     vm_id = "9001"
-    vm_name = "ubuntu-server-22.04"
-    template_description = "Ubuntu Server 22.04 Jammy"
+    vm_name = "ubuntu-server-24.04"
+    template_description = "Ubuntu Server 24.04"
 
-    iso_file = "local:iso/ubuntu-22.04.3-live-server-amd64.iso"
+    iso_file = "local:iso/ubuntu-24.04.1-live-server-amd64.iso"
     iso_storage_pool = "local"
     unmount_iso = true
 
@@ -51,8 +51,7 @@ source "proxmox" "ubuntu-server" {
     disks {
         disk_size = "20G"
         format = "raw"
-        storage_pool = "local-lvm-nvme"
-        storage_pool_type = "lvm"
+        storage_pool = "local-nvme"
         type = "scsi"
     }
 
@@ -67,7 +66,7 @@ source "proxmox" "ubuntu-server" {
     }
 
     cloud_init = true
-    cloud_init_storage_pool = "local-lvm-nvme"
+    cloud_init_storage_pool = "local-nvme"
 
      # PACKER Boot Commands
     boot_command = [
@@ -90,8 +89,8 @@ source "proxmox" "ubuntu-server" {
 # Build Definition to create the VM Template
 build {
 
-    name = "ubuntu-server-22.04"
-    sources = ["source.proxmox.ubuntu-server"]
+    name = "ubuntu-server-24.04"
+    sources = ["source.proxmox-iso.ubuntu-server"]
 
     # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
     provisioner "shell" {
