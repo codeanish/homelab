@@ -36,7 +36,7 @@ source "proxmox-iso" "ubuntu-server" {
     insecure_skip_tls_verify = true
 
     node = "pve-02"
-    vm_id = "9001"
+    vm_id = "9002"
     vm_name = "ubuntu-server-24.04"
     template_description = "Ubuntu Server 24.04"
 

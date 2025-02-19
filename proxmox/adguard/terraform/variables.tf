@@ -1,13 +1,13 @@
 # PROVIDER VARIABLES
-variable "pve01_api_url" {
+variable "pve_api_url" {
   type = string
 }
 
-variable "pve01_api_token_id" {
+variable "pve_api_token_id" {
   type = string
 }
 
-variable "pve01_api_token_secret" {
+variable "pve_api_token_secret" {
   type = string
 }
 
@@ -24,18 +24,6 @@ variable "pve02_gateway_ip" {
 }
 
 variable "pve02_adguard_ip" {
-  type = string
-}
-
-variable "pve02_api_url" {
-  type = string
-}
-
-variable "pve02_api_token_id" {
-  type = string
-}
-
-variable "pve02_api_token_secret" {
   type = string
 }
 

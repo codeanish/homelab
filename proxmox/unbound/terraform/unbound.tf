@@ -1,5 +1,4 @@
 resource "proxmox_vm_qemu" "unbound_pve01" {
-    provider = proxmox.pve01
     target_node = var.pve01_target_node
     vmid = 101
     name = "unbound"
@@ -51,10 +50,9 @@ resource "proxmox_vm_qemu" "unbound_pve01" {
 }
 
 resource "proxmox_vm_qemu" "unbound_pve02" {
-    provider = proxmox.pve02
     target_node = var.pve02_target_node
-    vmid = 101
-    name = "unbound"
+    vmid = 301
+    name = "unbound-2"
     desc = "Ubuntu Server 24.04 - Unbound"
     clone = var.ubuntu_base_image
     onboot = true 

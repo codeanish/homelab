@@ -1,5 +1,4 @@
 resource "proxmox_vm_qemu" "adguard_pve01" {
-    provider = proxmox.pve01
     target_node = var.pve01_target_node
     vmid = 102
     name = "adguard"
@@ -51,10 +50,9 @@ resource "proxmox_vm_qemu" "adguard_pve01" {
 }
 
 resource "proxmox_vm_qemu" "adguard_pve02" {
-    provider = proxmox.pve02
     target_node = var.pve02_target_node
-    vmid = 102
-    name = "adguard"
+    vmid = 302
+    name = "adguard-02"
     desc = "Ubuntu Server 24.04 - Adguard"
     clone = var.ubuntu_base_image
     onboot = true 
