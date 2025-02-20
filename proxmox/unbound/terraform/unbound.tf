@@ -4,7 +4,8 @@ resource "proxmox_vm_qemu" "unbound_pve01" {
     name = "unbound"
     desc = "Ubuntu Server 24.04 - Unbound"
     clone = var.ubuntu_base_image
-    onboot = true 
+    onboot = true
+    boot= "order=scsi0"
     agent = 1
     full_clone = true
     
@@ -56,6 +57,7 @@ resource "proxmox_vm_qemu" "unbound_pve02" {
     desc = "Ubuntu Server 24.04 - Unbound"
     clone = var.ubuntu_base_image
     onboot = true 
+    boot= "order=scsi0"
     agent = 1
     full_clone = true
     
