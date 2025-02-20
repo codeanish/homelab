@@ -1,4 +1,4 @@
-resource "proxmox_vm_qemu" "unbound" {
+resource "proxmox_vm_qemu" "searxng" {
     for_each = var.configuration
     target_node = each.value.node
     vmid = each.value.vmid
@@ -21,7 +21,7 @@ resource "proxmox_vm_qemu" "unbound" {
             scsi0 {
                 disk{
                     storage = var.disk_storage_volume
-                    size = "10G"
+                    size = "20G"
                     format = "raw"
                     discard = true
                     emulatessd = true

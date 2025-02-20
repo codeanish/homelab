@@ -1,0 +1,49 @@
+---
+- name: Install & Configure SearXNG
+  hosts: searxng_2
+  become: true
+  vars:
+    searxng_port: "8888"
+    base_url: "http://localhost:8888"
+    docker_network_name: "searxng-net"
+  tasks:
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+        update_cache: yes
+    - name: Install keepalived
+      apt:
+        name: keepalived
+        state: latest
+    - name: Copy keepalived.conf
+      copy:
+        src: files/keepalived_1.conf
+        dest: /etc/keepalived/keepalived.conf
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Enable and start keepalived service
+      systemd:
+        name: keepalived
+        enabled: yes
+        state: started
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: true
+
+    - name: Ensure Docker is started
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Pull the SearXNG Docker image
+      command: docker pull searxng/searxng
+
+    - name: Create Docker network (optional)
+      command: docker network create "{{ docker_network_name }}"
+
+    - name: Run the SearXNG container
+      command: docker run -d --name searxng -p "{{ searxng_port }}:8080" -e BASE_URL="{{ base_url }}" --network "{{ docker_network_name }}" --restart always searxng/searxng
