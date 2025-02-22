@@ -35,12 +35,12 @@ source "proxmox-iso" "ubuntu-server" {
     token = "${var.proxmox_api_token_secret}"
     insecure_skip_tls_verify = true
 
-    node = "pve-02"
-    vm_id = "9002"
+    node = "pve-03"
+    vm_id = "9003"
     vm_name = "ubuntu-server-24.04"
     template_description = "Ubuntu Server 24.04"
 
-    iso_file = "local:iso/ubuntu-24.04.1-live-server-amd64.iso"
+    iso_file = "local:iso/ubuntu-24.04.2-live-server-amd64.iso"
     iso_storage_pool = "local"
     unmount_iso = true
 

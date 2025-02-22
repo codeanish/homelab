@@ -27,11 +27,23 @@ variable "pve02_unbound_ip" {
   type = string
 }
 
+variable "pve03_unbound_ip" {
+  type = string
+}
+
+variable "pve03_gateway_ip" {
+  type = string
+}
+
 variable "pve01_target_node" {
   type = string
 }
 
 variable "pve02_target_node" {
+  type = string
+}
+
+variable "pve03_target_node" {
   type = string
 }
 
