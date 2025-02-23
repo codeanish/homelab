@@ -23,7 +23,33 @@ variable "configuration" {
   }))
 }
 
-variable "ubuntu_base_image" {
+variable "cores" {
+  type = number
+  default = 1
+}
+
+variable memory {
+  type = number
+  default = 1024
+  description = "Memory in MB"
+}
+
+variable storage_size_in_gb {
+  type = number
+  default = 20
+  description = "Storage size in GB, minimum 20GB"
+}
+
+variable tags {
+  type = list(string)
+  default = []
+}
+
+variable "description" {
+  type = string
+}
+
+variable "base_image" {
   type = string
 }
 

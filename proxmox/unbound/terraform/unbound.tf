@@ -3,27 +3,27 @@ resource "proxmox_vm_qemu" "unbound" {
   target_node = each.value.node
   vmid        = each.value.vmid
   name        = each.value.name
-  desc        = "Ubuntu Server 24.04 - Unbound"
-  clone       = var.ubuntu_base_image
+  desc        = var.description
+  clone       = var.base_image
   onboot      = true
   boot        = "order=scsi0"
   agent       = 1
   full_clone  = true
 
-  tags = "prod,ubuntu-24-04"  
+  tags = local.tags
 
   # VM Specs
-  cores    = 2
+  cores    = var.cores
   sockets  = 1
   cpu_type = "x86-64-v2-AES"
-  memory   = 1024
+  memory   = var.memory
 
   disks {
     scsi {
       scsi0 {
         disk {
           storage    = var.disk_storage_volume
-          size       = "20G"
+          size       = local.storage_size
           format     = "raw"
           discard    = true
           emulatessd = true
