@@ -11,40 +11,16 @@ variable "pve_api_token_secret" {
   type = string
 }
 
-variable "pve01_unbound_ip" {
-  type = string
-}
+# VM CONFIGURATION
 
-variable "pve01_gateway_ip" {
-  type = string
-}
-
-variable "pve02_gateway_ip" {
-  type = string
-}
-
-variable "pve02_unbound_ip" {
-  type = string
-}
-
-variable "pve03_unbound_ip" {
-  type = string
-}
-
-variable "pve03_gateway_ip" {
-  type = string
-}
-
-variable "pve01_target_node" {
-  type = string
-}
-
-variable "pve02_target_node" {
-  type = string
-}
-
-variable "pve03_target_node" {
-  type = string
+variable "configuration" {
+  type = map(object({
+    node = string
+    ip = string
+    gateway = string
+    vmid = number
+    name = string
+  }))
 }
 
 variable "ubuntu_base_image" {
@@ -58,6 +34,8 @@ variable "disk_storage_volume" {
 variable "network_bridge" {
   type = string
 }
+
+# CLOUD INIT
 
 variable "ciuser" {
   type = string
