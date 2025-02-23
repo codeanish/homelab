@@ -1,72 +1,75 @@
 # PROVIDER VARIABLES
-variable "pve01_api_url" {
+variable "api_url" {
   type = string
 }
 
-variable "pve01_api_token_id" {
+variable "token_id" {
   type = string
 }
 
-variable "pve01_api_token_secret" {
+variable "token_secret" {
   type = string
 }
 
-variable "pve02_api_url" {
-  type = string
+# CONTROL PLANE CONFIGURATION
+
+variable "control_plane_configuration" {
+  type = map(object({
+    node     = string
+    vmid     = number
+    name     = string
+    cpu_cores= number
+    memory_in_mb = number
+    disk_size_in_gb = number
+  }))
 }
 
-variable "pve02_api_token_id" {
-  type = string
+# variable "control_plane_cpu_cores" {
+#   type    = number
+#   default = 2
+# }
+
+# variable "control_plane_memory_in_mb" {
+#   type    = number
+#   default = 2048
+# }
+
+# variable "control_plane_disk_size_in_gb" {
+#   type = number
+# }
+
+# WORKER CONFIGURATION
+
+variable "worker_configuration" {
+  type = map(object({
+    node     = string
+    vmid     = number
+    name     = string
+    cpu_cores= number
+    memory_in_mb = number
+    disk_size_in_gb = number
+  }))
 }
 
-variable "pve02_api_token_secret" {
-  type = string
-}
+# variable "worker_cpu_cores" {
+#   type    = number
+#   default = 2
+# }
 
-variable "pve01_target_node" {
-  type = string
-}
+# variable "worker_memory_in_mb" {
+#   type    = number
+#   default = 2048
+# }
 
-variable "pve02_target_node" {
-  type = string
-}
+# variable "worker_disk_size_in_gb" {
+#   type = number
+# }
 
 # VM VARIABLES
 variable "talos_version" {
   type = string
 }
 
-variable "control_plane_nodes" {
-  type    = number
-  default = 1
-}
-
-variable "control_plane_cpu_cores" {
-  type    = number
-  default = 2
-}
-
-variable "worker_cpu_cores" {
-  type    = number
-  default = 2
-}
-
-variable "control_plane_memory_in_mb" {
-  type    = number
-  default = 2048
-}
-
-variable "worker_nodes" {
-  type    = number
-  default = 2
-}
-
-variable "worker_memory_in_mb" {
-  type    = number
-  default = 2048
-}
-
-# DISK ISO VARIABLES
 variable "iso_file_name" {
   type = string
 }
@@ -75,20 +78,10 @@ variable "iso_file_storage_pool" {
   type = string
 }
 
-# STORAGE VARIABLES
-variable "control_plane_disk_size_in_gb" {
-  type = number
-}
-
-variable "worker_disk_size_in_gb" {
-  type = number
-}
-
 variable "disk_storage_volume" {
   type = string
 }
 
-# NETWORK VARIABLES
 variable "network_bridge" {
   type    = string
   default = "vmbr1"
