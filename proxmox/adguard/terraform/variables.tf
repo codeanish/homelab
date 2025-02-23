@@ -11,43 +11,45 @@ variable "pve_api_token_secret" {
   type = string
 }
 
-variable "pve01_adguard_ip" {
+# VM CONFIGURATION
+
+variable "configuration" {
+  type = map(object({
+    node = string
+    ip = string
+    gateway = string
+    vmid = number
+    name = string
+  }))
+}
+
+variable "cores" {
+  type = number
+  default = 1
+}
+
+variable memory {
+  type = number
+  default = 1024
+  description = "Memory in MB"
+}
+
+variable storage_size_in_gb {
+  type = number
+  default = 20
+  description = "Storage size in GB, minimum 20GB"
+}
+
+variable tags {
+  type = list(string)
+  default = []
+}
+
+variable "description" {
   type = string
 }
 
-variable "pve01_gateway_ip" {
-  type = string
-}
-
-variable "pve02_gateway_ip" {
-  type = string
-}
-
-variable "pve02_adguard_ip" {
-  type = string
-}
-
-variable "pve03_adguard_ip" {
-  type = string
-}
-
-variable "pve03_gateway_ip" {
-  type = string
-}
-
-variable "pve01_target_node" {
-  type = string
-}
-
-variable "pve02_target_node" {
-  type = string
-}
-
-variable "pve03_target_node" {
-  type = string
-}
-
-variable "ubuntu_base_image" {
+variable "base_image" {
   type = string
 }
 
@@ -58,6 +60,8 @@ variable "disk_storage_volume" {
 variable "network_bridge" {
   type = string
 }
+
+# CLOUD INIT
 
 variable "ciuser" {
   type = string
