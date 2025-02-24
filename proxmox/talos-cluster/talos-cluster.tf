@@ -8,6 +8,7 @@ resource "proxmox_vm_qemu" "talos_control_plane" {
   onboot      = true
   agent       = 1
   vm_state    = var.vm_state
+  tags        = local.tags
 
   # VM Specs
   cores    = each.value.cpu_cores
@@ -49,6 +50,7 @@ resource "proxmox_vm_qemu" "talos_worker" {
   onboot      = true
   agent       = 1
   vm_state    = var.vm_state
+  tags        = local.tags
 
   # VM Specs
   cores    = each.value.cpu_cores
