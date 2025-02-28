@@ -74,6 +74,15 @@ resource "proxmox_vm_qemu" "talos_worker" {
     slot    = "sata0"
   }
 
+  # CEPH Rook Cluster Storage
+  disk {
+    size   = "10G"
+    type    = "disk"
+    format  = "raw"
+    storage = var.disk_storage_volume
+    slot    = "sata1"
+  }
+
   # Networking
   network {
     id     = "0"
